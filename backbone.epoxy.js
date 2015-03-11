@@ -64,7 +64,7 @@
   var modelProps = ['computeds'];
 
   Epoxy.Model = Backbone.Model.extend({
-    _super: Backbone.Model,
+    _super: Backbone.RelationalModel,
 
     // Backbone.Model constructor override:
     // configures computed model attributes around the underlying native Backbone model.
@@ -1310,7 +1310,7 @@
 
       result.push(key +':'+ value);
     }
-    
+
     return result.join(',');
   }
 
