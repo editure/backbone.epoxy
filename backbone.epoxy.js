@@ -64,7 +64,7 @@
   var modelProps = ['computeds'];
 
   Epoxy.Model = Backbone.Model.extend({
-    _super: Backbone.RelationalModel,
+    _super: Backbone.Model,
 
     // Backbone.Model constructor override:
     // configures computed model attributes around the underlying native Backbone model.
@@ -1137,7 +1137,14 @@
     // unbinds the view before performing native removal tasks.
     remove: function() {
       this.removeBindings();
-      _super(this, 'remove', arguments);
+
+      // Sims-2686: A hack that will keep me up at night, but is needed to prevent looping.  The
+      //  _super was going to layoutmanager, which in turn calls back to this remove, so I've replaced
+      //  it with the lines from the actual Backbone.View.remove, since that's the one we need.
+      //  -Dimitri
+      this.$el.remove();
+      this.stopListening();
+      // _super(this, 'remove', arguments);
     }
 
   }, mixins);
