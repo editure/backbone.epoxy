@@ -70,7 +70,7 @@
     // configures computed model attributes around the underlying native Backbone model.
     constructor: function(attributes, options) {
       _.extend(this, _.pick(options||{}, modelProps));
-      _super(this, 'constructor', arguments);
+      // _super(this, 'constructor', arguments);
       this.initComputeds(attributes, options);
     },
 
@@ -95,7 +95,7 @@
       }
 
       // Default to native Backbone.Model get operation:
-      return _super(this, 'get', arguments);
+      // return _super(this, 'get', arguments);
     },
 
     // Backbone.Model.set() override:
@@ -130,7 +130,7 @@
       delete this._setting;
 
       // Pass all resulting set params along to the underlying Backbone Model.
-      var result = _super(this, 'set', [params, options]);
+      // var result = _super(this, 'set', [params, options]);
 
       // Dispatch all outstanding computed events:
       if (!options.silent) {
@@ -152,7 +152,7 @@
     // Backbone.Model.toJSON() override:
     // adds a 'computed' option, specifying to include computed attributes.
     toJSON: function(options) {
-      var json = _super(this, 'toJSON', arguments);
+      // var json = _super(this, 'toJSON', arguments);
 
       if (options && options.computed) {
         _.each(this.c(), function(computed, attribute) {
@@ -167,7 +167,7 @@
     // clears all computed attributes before destroying.
     destroy: function() {
       this.clearComputeds();
-      return _super(this, 'destroy', arguments);
+      // return _super(this, 'destroy', arguments);
     },
 
     // Computed namespace manager:
