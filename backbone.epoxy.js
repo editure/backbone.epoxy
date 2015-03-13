@@ -70,7 +70,8 @@
     // configures computed model attributes around the underlying native Backbone model.
     constructor: function(attributes, options) {
       _.extend(this, _.pick(options||{}, modelProps));
-      _super(this, 'constructor', arguments);
+      // RP-3932 : Since this is used as a mixin, these excess calls are being duplicated -Kevin Colten 3/13/2015
+      // _super(this, 'constructor', arguments);
       this.initComputeds(attributes, options);
     },
 
@@ -95,7 +96,8 @@
       }
 
       // Default to native Backbone.Model get operation:
-      return _super(this, 'get', arguments);
+      // RP-3932 : Since this is used as a mixin, these excess calls are being duplicated -Kevin Colten 3/13/2015
+      // return _super(this, 'get', arguments);
     },
 
     // Backbone.Model.set() override:
@@ -167,7 +169,8 @@
     // clears all computed attributes before destroying.
     destroy: function() {
       this.clearComputeds();
-      return _super(this, 'destroy', arguments);
+      // RP-3932 : Since this is used as a mixin, these excess calls are being duplicated -Kevin Colten 3/13/2015
+      // return _super(this, 'destroy', arguments);
     },
 
     // Computed namespace manager:
