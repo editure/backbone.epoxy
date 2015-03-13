@@ -70,6 +70,7 @@
     // configures computed model attributes around the underlying native Backbone model.
     constructor: function(attributes, options) {
       _.extend(this, _.pick(options||{}, modelProps));
+      // RP-3932 : Since this is used as a mixin, these excess calls are being duplicated -Kevin Colten 3/13/2015
       // _super(this, 'constructor', arguments);
       this.initComputeds(attributes, options);
     },
@@ -95,6 +96,7 @@
       }
 
       // Default to native Backbone.Model get operation:
+      // RP-3932 : Since this is used as a mixin, these excess calls are being duplicated -Kevin Colten 3/13/2015
       // return _super(this, 'get', arguments);
     },
 
@@ -130,7 +132,7 @@
       delete this._setting;
 
       // Pass all resulting set params along to the underlying Backbone Model.
-      // var result = _super(this, 'set', [params, options]);
+      var result = _super(this, 'set', [params, options]);
 
       // Dispatch all outstanding computed events:
       if (!options.silent) {
@@ -152,7 +154,7 @@
     // Backbone.Model.toJSON() override:
     // adds a 'computed' option, specifying to include computed attributes.
     toJSON: function(options) {
-      // var json = _super(this, 'toJSON', arguments);
+      var json = _super(this, 'toJSON', arguments);
 
       if (options && options.computed) {
         _.each(this.c(), function(computed, attribute) {
@@ -167,6 +169,7 @@
     // clears all computed attributes before destroying.
     destroy: function() {
       this.clearComputeds();
+      // RP-3932 : Since this is used as a mixin, these excess calls are being duplicated -Kevin Colten 3/13/2015
       // return _super(this, 'destroy', arguments);
     },
 
