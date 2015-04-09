@@ -1212,7 +1212,7 @@
   // @param value: the value to set, or 'undefined' to get the current value.
   function accessViewDataAttribute(source, attribute, value, options) {
     // Register the attribute to the bindings map, if enabled:
-    viewMap && viewMap.push([source, 'change:'+attribute]);
+    viewMap && viewMap.push([source, 'change:'+attribute]) && viewMap.push([source, 'relational:change:'+attribute]);
 
     // Set attribute value when accessor is invoked with an argument:
     if (!isUndefined(value)) {
