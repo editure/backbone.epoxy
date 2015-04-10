@@ -88,7 +88,7 @@
     get: function(attribute) {
 
       // Automatically register bindings while building out computed dependency graphs:
-      modelMap && modelMap.push(['change:'+attribute, this]);
+      modelMap && modelMap.push(['change:'+attribute, this]) && modelMap.push(['relational:change:'+attribute, this]);
 
       // Return a computed property value, if available:
       if (this.hasComputed(attribute)) {
